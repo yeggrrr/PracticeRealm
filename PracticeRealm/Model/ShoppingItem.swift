@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct ShoppingList {
+    let list: [ShoppingItem]
+}
+
 struct ShoppingItem {
     let name: String
     let price: Int

@@ -1,0 +1,29 @@
+{
+    "list": [
+        {
+            "name": "애호박",
+            "price": 1000,
+            "remaining_stock": 3
+        },
+        {
+            "name": "복숭아",
+            "price": 2000,
+            "remaining_stock": 10
+        },
+        {
+            "name": "양파",
+            "price": 1500,
+            "remaining_stock": 8
+        },
+        {
+            "name": "맥북",
+            "price": 3000000,
+            "remaining_stock": 2
+        },
+        {
+            "name": "환타",
+            "price": 3500,
+            "remaining_stock": 21
+        }
+    ]
+}
