@@ -8,12 +8,25 @@
 import UIKit
 
 class ShoppingListViewController: UIViewController {
-
+    // MARK: UI
+    private let shoppingListView = ShoppingListView()
+    
+    // MARK: Properties
+    
+    // MARK: View Life Cycle
+    override func loadView() {
+        view = shoppingListView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
     }
+    
+    // MARK: Configure
+    
+    // MARK: Functions
+    
+    // MARK: Actions
 }
 
