@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import SnapKit
 
-class ShoppingListView: UIView {
+class ShoppingListView: UIView, ViewRepresentable {
     // MARK: UI
+    let tableView = UITableView()
     
     // MARK: Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configure()
+        addSubviews()
         setConstraints()
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -23,8 +26,14 @@ class ShoppingListView: UIView {
     }
     
     // MARK: Configure
+    func addSubviews() {
+        addSubview(tableView)
+    }
+    
     func setConstraints() {
-        
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     func configure() {
