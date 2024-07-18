@@ -17,6 +17,8 @@
 		68C0A6E92C496568004B812F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 68C0A6E82C496568004B812F /* SnapKit */; };
 		68C0A6EB2C496704004B812F /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6EA2C496704004B812F /* ShoppingListView.swift */; };
 		68C0A6ED2C496A3B004B812F /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6EC2C496A3B004B812F /* ViewRepresentable.swift */; };
+		68C0A6F02C496B67004B812F /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6EF2C496B67004B812F /* ShoppingListTableViewCell.swift */; };
+		68C0A6F32C496C0F004B812F /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6F22C496C0F004B812F /* View+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		68C0A6DF2C4964F3004B812F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		68C0A6EA2C496704004B812F /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		68C0A6EC2C496A3B004B812F /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
+		68C0A6EF2C496B67004B812F /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
+		68C0A6F22C496C0F004B812F /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,14 +71,32 @@
 			children = (
 				68C0A6CB2C4964BD004B812F /* AppDelegate.swift */,
 				68C0A6CD2C4964BD004B812F /* SceneDelegate.swift */,
-				68C0A6CF2C4964BD004B812F /* ShoppingListViewController.swift */,
-				68C0A6EA2C496704004B812F /* ShoppingListView.swift */,
 				68C0A6D42C4964BE004B812F /* Assets.xcassets */,
 				68C0A6D62C4964BE004B812F /* LaunchScreen.storyboard */,
+				68C0A6F12C496C06004B812F /* Extension */,
+				68C0A6EE2C496B43004B812F /* ShoppingList */,
 				68C0A6D92C4964BE004B812F /* Info.plist */,
 				68C0A6EC2C496A3B004B812F /* ViewRepresentable.swift */,
 			);
 			path = PracticeRealm;
+			sourceTree = "<group>";
+		};
+		68C0A6EE2C496B43004B812F /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				68C0A6EA2C496704004B812F /* ShoppingListView.swift */,
+				68C0A6CF2C4964BD004B812F /* ShoppingListViewController.swift */,
+				68C0A6EF2C496B67004B812F /* ShoppingListTableViewCell.swift */,
+			);
+			path = ShoppingList;
+			sourceTree = "<group>";
+		};
+		68C0A6F12C496C06004B812F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				68C0A6F22C496C0F004B812F /* View+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +181,8 @@
 				68C0A6EB2C496704004B812F /* ShoppingListView.swift in Sources */,
 				68C0A6D02C4964BD004B812F /* ShoppingListViewController.swift in Sources */,
 				68C0A6CC2C4964BD004B812F /* AppDelegate.swift in Sources */,
+				68C0A6F02C496B67004B812F /* ShoppingListTableViewCell.swift in Sources */,
+				68C0A6F32C496C0F004B812F /* View+.swift in Sources */,
 				68C0A6CE2C4964BD004B812F /* SceneDelegate.swift in Sources */,
 				68C0A6ED2C496A3B004B812F /* ViewRepresentable.swift in Sources */,
 			);

@@ -14,6 +14,7 @@ class ShoppingListViewController: UIViewController {
     
     // MARK: Properties
     
+    
     // MARK: View Life Cycle
     override func loadView() {
         view = shoppingListView
@@ -22,9 +23,13 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addSubviews()
-        setConstraints()
         configure()
+    }
+    
+    func configure() {
+        shoppingListView.tableView.delegate = self
+        shoppingListView.tableView.dataSource = self
+        shoppingListView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
     }
     
     // MARK: Functions
@@ -35,31 +40,16 @@ class ShoppingListViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.identifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
+        cell.nameLabel.text = "name"
+        cell.priceLabel.text = "10000원"
+        return cell
     }
 }
 
 // MARK: UITableViewDelegate
 extension ShoppingListViewController: UITableViewDelegate { }
-
-// MARK: ViewRepresentable
-extension ShoppingListViewController: ViewRepresentable {
-    func addSubviews() {
-        view.addSubview(shoppingListView)
-    }
-    
-    func setConstraints() {
-        shoppingListView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    }
-    
-    func configure() {
-        shoppingListView.tableView.delegate = self
-        shoppingListView.tableView.dataSource = self
-    }
-}
