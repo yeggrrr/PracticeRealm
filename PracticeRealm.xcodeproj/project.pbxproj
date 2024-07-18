@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		68C0A6CC2C4964BD004B812F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6CB2C4964BD004B812F /* AppDelegate.swift */; };
 		68C0A6CE2C4964BD004B812F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6CD2C4964BD004B812F /* SceneDelegate.swift */; };
-		68C0A6D02C4964BD004B812F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6CF2C4964BD004B812F /* ViewController.swift */; };
+		68C0A6D02C4964BD004B812F /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A6CF2C4964BD004B812F /* ShoppingListViewController.swift */; };
 		68C0A6D52C4964BE004B812F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A6D42C4964BE004B812F /* Assets.xcassets */; };
 		68C0A6D82C4964BE004B812F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A6D72C4964BE004B812F /* Base */; };
 		68C0A6E02C4964F3004B812F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A6DF2C4964F3004B812F /* .gitignore */; };
@@ -21,7 +21,7 @@
 		68C0A6C82C4964BD004B812F /* PracticeRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C0A6CB2C4964BD004B812F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68C0A6CD2C4964BD004B812F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		68C0A6CF2C4964BD004B812F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68C0A6CF2C4964BD004B812F /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		68C0A6D42C4964BE004B812F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68C0A6D72C4964BE004B812F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68C0A6D92C4964BE004B812F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			children = (
 				68C0A6CB2C4964BD004B812F /* AppDelegate.swift */,
 				68C0A6CD2C4964BD004B812F /* SceneDelegate.swift */,
-				68C0A6CF2C4964BD004B812F /* ViewController.swift */,
+				68C0A6CF2C4964BD004B812F /* ShoppingListViewController.swift */,
 				68C0A6D42C4964BE004B812F /* Assets.xcassets */,
 				68C0A6D62C4964BE004B812F /* LaunchScreen.storyboard */,
 				68C0A6D92C4964BE004B812F /* Info.plist */,
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68C0A6D02C4964BD004B812F /* ViewController.swift in Sources */,
+				68C0A6D02C4964BD004B812F /* ShoppingListViewController.swift in Sources */,
 				68C0A6CC2C4964BD004B812F /* AppDelegate.swift in Sources */,
 				68C0A6CE2C4964BD004B812F /* SceneDelegate.swift in Sources */,
 			);
@@ -302,6 +302,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +333,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

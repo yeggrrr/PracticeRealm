@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ShoppingListViewController.swift
 //  PracticeRealm
 //
 //  Created by YJ on 7/18/24.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ShoppingListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
     }
-
-
 }
 
