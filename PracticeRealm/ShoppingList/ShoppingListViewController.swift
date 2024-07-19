@@ -15,6 +15,12 @@ class ShoppingListViewController: UIViewController {
     // MARK: Properties
     var shoppingList: [ShoppingItem] = []
     
+    struct Model {
+        let titleInfoText: String
+        let subInfoText: String
+    }
+    
+    
     // MARK: View Life Cycle
     override func loadView() {
         view = shoppingListView
@@ -28,9 +34,15 @@ class ShoppingListViewController: UIViewController {
     }
     
     func configure() {
+        // shoppingListView
         shoppingListView.tableView.delegate = self
         shoppingListView.tableView.dataSource = self
         shoppingListView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
+        
+        // navigation
+        let cartBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartBarButtonClicked))
+        navigationItem.rightBarButtonItem = cartBarButtonItem
+        navigationItem.rightBarButtonItem?.tintColor = .systemPink
     }
     
     // MARK: Functions
@@ -59,6 +71,12 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
+    func makeModel(item: ShoppingItem) -> Model {
+        return Model(
+            titleInfoText: "\(item.name) (남은수량: \(item.remainingStock)개)",
+            subInfoText: item.price.formatted() + "원")
+    }
+    
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "닫기", style: .default)
@@ -67,6 +85,10 @@ class ShoppingListViewController: UIViewController {
     }
     
     // MARK: Actions
+    @objc func cartBarButtonClicked() {
+        let vc = CartViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -78,8 +100,9 @@ extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.identifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
         let item = shoppingList[indexPath.row]
-        cell.nameLabel.text = "\(item.name) (남은수량: \(item.remainingStock)개)"
-        cell.priceLabel.text = item.price.formatted() + "원"
+        let model = makeModel(item: item)
+        cell.nameLabel.text = model.titleInfoText
+        cell.priceLabel.text = model.subInfoText
         return cell
     }
 }
