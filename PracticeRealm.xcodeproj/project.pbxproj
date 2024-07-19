@@ -23,6 +23,7 @@
 		68C0A6F82C49722D004B812F /* ShoppingData.json in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A6F72C49722D004B812F /* ShoppingData.json */; };
 		68C0A73F2C4A9E7E004B812F /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A73E2C4A9E7E004B812F /* CartViewController.swift */; };
 		68C0A7422C4A9EE5004B812F /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A7412C4A9EE5004B812F /* CartView.swift */; };
+		68C0A7442C4AA167004B812F /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C0A7432C4AA167004B812F /* CartItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		68C0A6F72C49722D004B812F /* ShoppingData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ShoppingData.json; sourceTree = "<group>"; };
 		68C0A73E2C4A9E7E004B812F /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		68C0A7412C4A9EE5004B812F /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		68C0A7432C4AA167004B812F /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			children = (
 				68C0A6F42C4971C8004B812F /* ShoppingItem.swift */,
 				68C0A6F72C49722D004B812F /* ShoppingData.json */,
+				68C0A7432C4AA167004B812F /* CartItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			files = (
 				68C0A7422C4A9EE5004B812F /* CartView.swift in Sources */,
 				68C0A6EB2C496704004B812F /* ShoppingListView.swift in Sources */,
+				68C0A7442C4AA167004B812F /* CartItem.swift in Sources */,
 				68C0A6D02C4964BD004B812F /* ShoppingListViewController.swift in Sources */,
 				68C0A6CC2C4964BD004B812F /* AppDelegate.swift in Sources */,
 				68C0A6F02C496B67004B812F /* ShoppingListTableViewCell.swift in Sources */,
