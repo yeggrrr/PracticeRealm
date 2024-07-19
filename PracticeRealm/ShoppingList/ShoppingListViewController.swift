@@ -61,6 +61,25 @@ class ShoppingListViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    func addToCart(row: Int) {
+        let item = shoppingList[row]
+        guard shoppingList[row].remainingStock != 0 else { return }
+        DataStorage.shared.shoppingList[row].remainingStock -= 1
+        
+        let newCartItem = CartItem(
+            name: item.name,
+            price: item.price,
+            count: 1)
+        
+        if let index = DataStorage.shared.cartList.firstIndex(where: { $0 == newCartItem }) {
+            DataStorage.shared.cartList[index].count += 1
+        } else {
+            DataStorage.shared.cartList.append(newCartItem)
+        }
+        
+        shoppingListView.tableView.reloadData()
+    }
+    
     // MARK: Actions
     @objc func cartBarButtonClicked() {
         let vc = CartViewController()
@@ -85,22 +104,7 @@ extension ShoppingListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = shoppingList[indexPath.row]
-        guard shoppingList[indexPath.row].remainingStock != 0 else { return }
-        DataStorage.shared.shoppingList[indexPath.row].remainingStock -= 1
-        
-        let newCartItem = CartItem(
-            name: item.name,
-            price: item.price,
-            count: 1)
-        
-        if let index = DataStorage.shared.cartList.firstIndex(where: { $0 == newCartItem }) {
-            DataStorage.shared.cartList[index].count += 1
-        } else {
-            DataStorage.shared.cartList.append(newCartItem)
-        }
-        
-        tableView.reloadData()
+        addToCart(row: indexPath.row)
     }
 }
 

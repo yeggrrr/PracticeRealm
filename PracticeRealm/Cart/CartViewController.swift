@@ -34,9 +34,14 @@ class CartViewController: UIViewController {
         cartView.tableView.delegate = self
         cartView.tableView.dataSource = self
         cartView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
+        cartView.totalAmountLabel.text = "합계: \(sumTotalAmount().formatted())원"
     }
     
     // MARK: Functions
+    func sumTotalAmount() -> Int {
+        return DataStorage.shared.cartList.map { $0.price * $0.count }.reduce(0, +)
+    }
+    
     func makeModel(item: CartItem) -> Model {
         return Model(
             titleInfoText: item.name,
