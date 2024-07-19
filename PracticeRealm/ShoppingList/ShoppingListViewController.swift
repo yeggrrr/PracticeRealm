@@ -60,13 +60,6 @@ class ShoppingListViewController: UIViewController {
             subInfoText: item.price.formatted() + "원")
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "닫기", style: .default)
-        alert.addAction(closeAction)
-        present(alert, animated: true)
-    }
-    
     func addToCart(row: Int) {
         let item = shoppingList[row]
         guard shoppingList[row].remainingStock != 0 else { return }

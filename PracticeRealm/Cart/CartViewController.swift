@@ -34,12 +34,14 @@ class CartViewController: UIViewController {
         cartView.tableView.delegate = self
         cartView.tableView.dataSource = self
         cartView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
-        cartView.totalAmountLabel.text = "합계: \(sumTotalAmount().formatted())원"
+        cartView.buyButton.addTarget(self, action: #selector(buyButtonClicked), for: .touchUpInside)
+        updateTotalAmount()
     }
     
     // MARK: Functions
-    func sumTotalAmount() -> Int {
-        return DataStorage.shared.cartList.map { $0.price * $0.count }.reduce(0, +)
+    func updateTotalAmount() {
+        let sumTotalAmount = DataStorage.shared.cartList.map { $0.price * $0.count }.reduce(0, +)
+        cartView.totalAmountLabel.text = "합계: \(sumTotalAmount.formatted())원"
     }
     
     func makeModel(item: CartItem) -> Model {
@@ -67,10 +69,19 @@ class CartViewController: UIViewController {
             DataStorage.shared.shoppingList.append(newShoppingItem)
         }
         
+        updateTotalAmount()
         cartView.tableView.reloadData()
     }
     
     // MARK: Actions
+    @objc func buyButtonClicked() {
+        alertWithOk(title: "구매하시겠습니끼?") {
+            DataStorage.shared.cartList.removeAll()
+            self.updateTotalAmount()
+            self.cartView.tableView.reloadData()
+            self.alertWithClose(title: "구매가 완료되었습니다.", message: "", closeTitle: "확인")
+        }
+    }
 }
 
 extension CartViewController: UITableViewDataSource {
