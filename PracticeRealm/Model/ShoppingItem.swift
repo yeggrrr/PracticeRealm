@@ -14,7 +14,7 @@ struct ShoppingList: Decodable {
 struct ShoppingItem: Decodable {
     let name: String
     let price: Int
-    let remainingStock: Int
+    var remainingStock: Int
     
     enum CodingKeys: String, CodingKey {
         case name = "name"

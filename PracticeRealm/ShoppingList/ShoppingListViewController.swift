@@ -103,7 +103,14 @@ extension ShoppingListViewController: UITableViewDataSource {
         let model = makeModel(item: item)
         cell.nameLabel.text = model.titleInfoText
         cell.priceLabel.text = model.subInfoText
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard shoppingList[indexPath.row].remainingStock != 0 else { return }
+        shoppingList[indexPath.row].remainingStock -= 1
+        tableView.reloadData()
     }
 }
 
