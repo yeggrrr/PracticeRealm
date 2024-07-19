@@ -71,7 +71,7 @@ class ShoppingListViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataStorage.shared.shoppingList.count
+        return shoppingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,16 +94,7 @@ extension ShoppingListViewController: UITableViewDataSource {
             price: item.price,
             count: 1)
         
-        var index: Int?
-        for i in 0..<DataStorage.shared.cartList.count {
-            let item = DataStorage.shared.cartList[i]
-            if item == newCartItem {
-                index = i
-                return
-            }
-        }
-        
-        if let index = index {
+        if let index = DataStorage.shared.cartList.firstIndex(where: { $0 == newCartItem }) {
             DataStorage.shared.cartList[index].count += 1
         } else {
             DataStorage.shared.cartList.append(newCartItem)
