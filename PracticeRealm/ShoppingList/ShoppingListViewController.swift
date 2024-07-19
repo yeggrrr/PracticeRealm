@@ -13,7 +13,9 @@ class ShoppingListViewController: UIViewController {
     private let shoppingListView = ShoppingListView()
     
     // MARK: Properties
-    var shoppingList: [ShoppingItem] = []
+    var shoppingList: [ShoppingItem] {
+        DataStorage.shared.shoppingList
+    }
     
     struct Model {
         let titleInfoText: String
@@ -30,7 +32,7 @@ class ShoppingListViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        getShoppingList()
+        DataStorage.shared.initData()
     }
     
     func configure() {
@@ -46,31 +48,6 @@ class ShoppingListViewController: UIViewController {
     }
     
     // MARK: Functions
-    func load(fileName: String) -> Data? {
-        guard let fileLocation = Bundle.main.url(forResource: fileName, withExtension: "json") else { return nil }
-        
-        do {
-            let data = try Data(contentsOf: fileLocation)
-            return data
-        } catch {
-            return nil
-        }
-    }
-    
-    func getShoppingList() {
-        guard let data = load(fileName: "ShoppingData") else { return }
-        
-        do {
-            let decoder = JSONDecoder()
-            let result = try decoder.decode(ShoppingList.self, from: data)
-            shoppingList = result.list
-            shoppingListView.tableView.reloadData()
-        } catch {
-            shoppingList = []
-            showAlert(title: "⚠️", message: "데이터를 가자오는데 실패했습니다.\n다시 시도해주세요.")
-        }
-    }
-    
     func makeModel(item: ShoppingItem) -> Model {
         return Model(
             titleInfoText: "\(item.name) (남은수량: \(item.remainingStock)개)",
@@ -94,7 +71,7 @@ class ShoppingListViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingList.count
+        return DataStorage.shared.shoppingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,8 +85,30 @@ extension ShoppingListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = shoppingList[indexPath.row]
         guard shoppingList[indexPath.row].remainingStock != 0 else { return }
-        shoppingList[indexPath.row].remainingStock -= 1
+        DataStorage.shared.shoppingList[indexPath.row].remainingStock -= 1
+        
+        let newCartItem = CartItem(
+            name: item.name,
+            price: item.price,
+            count: 1)
+        
+        var index: Int?
+        for i in 0..<DataStorage.shared.cartList.count {
+            let item = DataStorage.shared.cartList[i]
+            if item == newCartItem {
+                index = i
+                return
+            }
+        }
+        
+        if let index = index {
+            DataStorage.shared.cartList[index].count += 1
+        } else {
+            DataStorage.shared.cartList.append(newCartItem)
+        }
+        
         tableView.reloadData()
     }
 }

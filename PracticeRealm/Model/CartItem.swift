@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct CartItem {
+struct CartItem: Equatable {
     let name: String
     let price: Int
-    let count: Int
+    var count: Int
+    
+    static func ==(lhs: CartItem, rhs: CartItem) -> Bool {
+        return lhs.name == rhs.name && lhs.price == rhs.price
+    }
 }

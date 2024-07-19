@@ -38,12 +38,12 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cartList.count
+        return DataStorage.shared.cartList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.identifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
-        let item = cartList[indexPath.row]
+        let item = DataStorage.shared.cartList[indexPath.row]
         cell.nameLabel.text = item.name
         cell.priceLabel.text = "\(item.price.formatted())원 * \(item.count)개 = \((item.price * item.count).formatted())원"
         return cell
