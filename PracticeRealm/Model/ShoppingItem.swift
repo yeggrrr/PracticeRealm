@@ -11,7 +11,7 @@ struct ShoppingList: Decodable {
     let list: [ShoppingItem]
 }
 
-struct ShoppingItem: Decodable {
+struct ShoppingItem: Decodable, Equatable {
     let name: String
     let price: Int
     var remainingStock: Int
@@ -20,5 +20,9 @@ struct ShoppingItem: Decodable {
         case name = "name"
         case price = "price"
         case remainingStock = "remaining_stock"
+    }
+    
+    static func ==(lhs: ShoppingItem, rhs: ShoppingItem) -> Bool {
+        return lhs.name == rhs.name && lhs.price == rhs.price
     }
 }

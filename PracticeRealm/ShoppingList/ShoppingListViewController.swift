@@ -35,6 +35,12 @@ class ShoppingListViewController: UIViewController {
         DataStorage.shared.initData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        shoppingListView.tableView.reloadData()
+    }
+    
     func configure() {
         // shoppingListView
         shoppingListView.tableView.delegate = self

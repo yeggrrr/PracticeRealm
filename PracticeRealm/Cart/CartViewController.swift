@@ -48,6 +48,28 @@ class CartViewController: UIViewController {
             subInfoText: "\(item.price.formatted())원 * \(item.count)개 = \((item.price * item.count).formatted())원")
     }
     
+    func removeToCart(row: Int) {
+        let item = DataStorage.shared.cartList[row]
+        DataStorage.shared.cartList[row].count -= 1
+        
+        if  DataStorage.shared.cartList[row].count == 0 {
+            DataStorage.shared.cartList.remove(at: row)
+        }
+        
+        let newShoppingItem = ShoppingItem(
+            name: item.name,
+            price: item.price,
+            remainingStock: 1)
+        
+        if let index = DataStorage.shared.shoppingList.firstIndex(where: { $0 == newShoppingItem }) {
+            DataStorage.shared.shoppingList[index].remainingStock += 1
+        } else {
+            DataStorage.shared.shoppingList.append(newShoppingItem)
+        }
+        
+        cartView.tableView.reloadData()
+    }
+    
     // MARK: Actions
 }
 
@@ -63,6 +85,10 @@ extension CartViewController: UITableViewDataSource {
         cell.nameLabel.text = model.titleInfoText
         cell.priceLabel.text = model.subInfoText
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        removeToCart(row: indexPath.row)
     }
 }
 
