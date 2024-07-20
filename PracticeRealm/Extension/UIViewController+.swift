@@ -1,5 +1,5 @@
 //
-//  ShowAlert+.swift
+//  UIViewController+.swift
 //  PracticeRealm
 //
 //  Created by YJ on 7/20/24.
@@ -25,5 +25,17 @@ extension UIViewController {
         alert.addAction(okButton)
         alert.addAction(cancelButton)
         present(alert, animated: true)
+    }
+    
+    var isLoadedBefore: Bool {
+        let key = "isLoadedBefore"
+        let isLoadedBefore = UserDefaults.standard.bool(forKey: key)
+        
+        if !isLoadedBefore {
+            UserDefaults.standard.setValue(true, forKey: key)
+        }
+        
+        print("isFirstLoad: \(isLoadedBefore)")
+        return isLoadedBefore
     }
 }
