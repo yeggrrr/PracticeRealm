@@ -35,7 +35,6 @@ extension UIViewController {
             UserDefaults.standard.setValue(true, forKey: key)
         }
         
-        print("isFirstLoad: \(isLoadedBefore)")
         return isLoadedBefore
     }
 }
