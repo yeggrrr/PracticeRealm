@@ -48,6 +48,7 @@ class ShoppingListViewController: UIViewController {
         shoppingListView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
         
         // navigation
+        navigationItem.title = "상품 목록"
         let cartBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartBarButtonClicked))
         navigationItem.rightBarButtonItem = cartBarButtonItem
         navigationItem.rightBarButtonItem?.tintColor = .systemPink

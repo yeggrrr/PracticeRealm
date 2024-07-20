@@ -31,6 +31,10 @@ class CartViewController: UIViewController {
     }
     
     func configure() {
+        // navigation
+        navigationItem.title = "장바구니"
+        
+        // cartView
         cartView.tableView.delegate = self
         cartView.tableView.dataSource = self
         cartView.tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
