@@ -43,7 +43,7 @@ class CartRepository: CartRepositoryType {
                 realm.add(item, update: .modified)
             }
         } catch {
-            print("Failed to add: \(error)")
+            print("Failed to update: \(error)")
         }
     }
     
@@ -53,7 +53,17 @@ class CartRepository: CartRepositoryType {
                 realm.delete(item)
             }
         } catch {
-            print("Failed to add: \(error)")
+            print("Failed to delete: \(error)")
+        }
+    }
+    
+    func deleteAll(item: CartItemRealm) {
+        do {
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print("Failed to deleteAll: \(error)")
         }
     }
 }
