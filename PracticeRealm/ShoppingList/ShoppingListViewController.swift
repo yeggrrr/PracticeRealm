@@ -99,6 +99,13 @@ extension ShoppingListViewController: UITableViewDataSource {
         let model = makeModel(item: item)
         cell.nameLabel.text = model.titleInfoText
         cell.priceLabel.text = model.subInfoText
+        if item.remainingStock == 0 {
+            cell.nameLabel.textColor = .systemPink
+            cell.priceLabel.textColor = .systemPink
+        } else {
+            cell.nameLabel.textColor = .label
+            cell.priceLabel.textColor = .label
+        }
         cell.selectionStyle = .none
         return cell
     }
