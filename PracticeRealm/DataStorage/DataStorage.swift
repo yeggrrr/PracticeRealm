@@ -12,7 +12,6 @@ class DataStorage {
     
     private init() { }
     
-    var shoppingList: [ShoppingItem] = []
     var cartList: [CartItem] = []
     
     private func load(fileName: String) -> Data? {
@@ -32,9 +31,16 @@ class DataStorage {
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ShoppingList.self, from: data)
-            shoppingList = result.list
+           
+            result.list.forEach {
+                let shoppingItemRealm = ShoppingItemRealm(
+                    name: $0.name,
+                    price: $0.price,
+                    remainingStock: $0.remainingStock)
+                ShoppingRepository.shared.add(item: shoppingItemRealm)
+            }
         } catch {
-            shoppingList = []
+            print("Failed to init data")
         }
     }
 }

@@ -62,15 +62,25 @@ class CartViewController: UIViewController {
             DataStorage.shared.cartList.remove(at: row)
         }
         
-        let newShoppingItem = ShoppingItem(
+        let newShoppingItem = ShoppingItemRealm(
             name: item.name,
             price: item.price,
             remainingStock: 1)
         
-        if let index = DataStorage.shared.shoppingList.firstIndex(where: { $0 == newShoppingItem }) {
-            DataStorage.shared.shoppingList[index].remainingStock += 1
+        let matchedItem = ShoppingRepository.shared.fetch().filter { shoppingItem in
+            shoppingItem.name == item.name && shoppingItem.price == item.price
+        }.first
+        
+        if let matchedItem = matchedItem {
+            let newShoppingItemRealm = ShoppingItemRealm(
+                id: matchedItem.id,
+                name: matchedItem.name,
+                price: matchedItem.price,
+                remainingStock: matchedItem.remainingStock + 1)
+            
+            ShoppingRepository.shared.update(item: newShoppingItemRealm)
         } else {
-            DataStorage.shared.shoppingList.append(newShoppingItem)
+            ShoppingRepository.shared.add(item: newShoppingItem)
         }
         
         updateTotalAmount()

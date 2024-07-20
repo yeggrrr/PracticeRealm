@@ -14,6 +14,14 @@ class ShoppingItemRealm: Object {
     @Persisted var price: Int
     @Persisted var remainingStock: Int
     
+    convenience init(id: ObjectId, name: String, price: Int, remainingStock: Int) {
+        self.init()
+        self.id = id
+        self.name = name
+        self.price = price
+        self.remainingStock = remainingStock
+    }
+    
     convenience init(name: String, price: Int, remainingStock: Int) {
         self.init()
         self.name = name

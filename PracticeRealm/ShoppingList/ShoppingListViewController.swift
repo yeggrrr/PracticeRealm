@@ -13,9 +13,6 @@ class ShoppingListViewController: UIViewController {
     private let shoppingListView = ShoppingListView()
     
     // MARK: Properties
-    var shoppingList: [ShoppingItem] {
-        DataStorage.shared.shoppingList
-    }
     
     struct Model {
         let titleInfoText: String
@@ -32,7 +29,12 @@ class ShoppingListViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        DataStorage.shared.initData()
+        
+        if !isLoadedBefore {
+            DataStorage.shared.initData()
+        }
+        
+        ShoppingRepository.shared.findFilePath()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,16 +57,23 @@ class ShoppingListViewController: UIViewController {
     }
     
     // MARK: Functions
-    func makeModel(item: ShoppingItem) -> Model {
+    func makeModel(item: ShoppingItemRealm) -> Model {
         return Model(
             titleInfoText: "\(item.name) (남은수량: \(item.remainingStock)개)",
             subInfoText: item.price.formatted() + "원")
     }
     
     func addToCart(row: Int) {
-        let item = shoppingList[row]
-        guard shoppingList[row].remainingStock != 0 else { return }
-        DataStorage.shared.shoppingList[row].remainingStock -= 1
+        let item = ShoppingRepository.shared.fetch()[row]
+        guard item.remainingStock != 0 else { return }
+        
+        let newShoppingItem = ShoppingItemRealm(
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            remainingStock: item.remainingStock - 1)
+        
+        ShoppingRepository.shared.update(item: newShoppingItem)
         
         let newCartItem = CartItem(
             name: item.name,
@@ -90,12 +99,12 @@ class ShoppingListViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingList.count
+        return ShoppingRepository.shared.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.identifier, for: indexPath) as? ShoppingListTableViewCell else { return UITableViewCell() }
-        let item = shoppingList[indexPath.row]
+        let item = ShoppingRepository.shared.fetch()[indexPath.row]
         let model = makeModel(item: item)
         cell.nameLabel.text = model.titleInfoText
         cell.priceLabel.text = model.subInfoText
