@@ -57,10 +57,13 @@ class CartRepository: CartRepositoryType {
         }
     }
     
-    func deleteAll(item: CartItemRealm) {
+    func deleteAll() {
         do {
             try realm.write {
-                realm.deleteAll()
+                let items = fetch()
+                for item in items {
+                    realm.delete(item)
+                }
             }
         } catch {
             print("Failed to deleteAll: \(error)")
@@ -74,4 +77,5 @@ protocol CartRepositoryType {
     func add(item: CartItemRealm)
     func update(item: CartItemRealm)
     func delete(item: CartItemRealm)
+    func deleteAll()
 }

@@ -29,12 +29,7 @@ class ShoppingListViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        
-        if !isLoadedBefore {
-            DataStorage.shared.initData()
-        }
-        
-        ShoppingRepository.shared.findFilePath()
+        initData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,15 +70,24 @@ class ShoppingListViewController: UIViewController {
         
         ShoppingRepository.shared.update(item: newShoppingItem)
         
-        let newCartItem = CartItem(
+        let newCartItem = CartItemRealm(
             name: item.name,
             price: item.price,
             count: 1)
         
-        if let index = DataStorage.shared.cartList.firstIndex(where: { $0 == newCartItem }) {
-            DataStorage.shared.cartList[index].count += 1
+        let matchedItem = CartRepository.shared.fetch().filter { cartItem in
+            cartItem.name == item.name && cartItem.price == item.price
+        }.first
+        
+        if let matchedItem = matchedItem {
+            let newCartItemRealm = CartItemRealm(
+                id: matchedItem.id,
+                name: matchedItem.name,
+                price: matchedItem.price,
+                count: matchedItem.count + 1)
+            CartRepository.shared.update(item: newCartItemRealm)
         } else {
-            DataStorage.shared.cartList.append(newCartItem)
+            CartRepository.shared.add(item: newCartItem)
         }
         
         shoppingListView.tableView.reloadData()
